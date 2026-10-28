@@ -371,3 +371,6 @@
 @media(min-width:1500px) and (min-height:850px){.page-review-all .review-card{padding:19px;column-gap:21px}.page-review-all .review-card>h3{font-size:23px}.page-review-all .review-card p{font-size:14px}}
 @media(max-width:760px){.page-review-all .review-card{display:flex;flex-direction:column;padding:16px;gap:0}.page-review-all .review-card>h3{font-size:22px;margin:15px 0 12px}.page-review-all .review-explanation{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding-top:12px;border-top:1px solid var(--line)}.page-review-all .review-card p{font-size:13px}}
 @media(max-height:760px) and (min-width:901px){.page-review-all .chapter-heading{margin-bottom:12px}.page-review-all .review-cards{gap:14px}.page-review-all .review-card{padding:13px}.page-review-all .source-note{margin-top:8px}}
+.page-review-all .review-cards{grid-auto-rows:1fr;align-items:stretch}
+.page-review-all .review-card{height:100%;align-self:stretch}
+.page-review-all .review-shot{aspect-ratio:16/9}
