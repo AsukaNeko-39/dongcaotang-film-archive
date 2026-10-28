@@ -65,23 +65,24 @@ $('#deckPrev').addEventListener('click',()=>goTo(current-1));$('#deckNext').addE
 function onHash(){const raw=decodeURIComponent(location.hash.slice(1)),id=raw==='review-continuity'?'review':raw;const index=pages.findIndex(p=>p.id===id);if(index>=0)goTo(index,{hash:false});else if(document.getElementById(id)?.classList.contains('source-entry'))openMaterials(id);}
 addEventListener('hashchange',onHash);
 function canScroll(direction,el=pages[current].querySelector('.page-content,.sound-content,.wrap')){if(!el||el.scrollHeight<=el.clientHeight+8)return false;return direction>0?el.scrollTop+el.clientHeight<el.scrollHeight-2:el.scrollTop>2;}
-let wheelAmount=0,lastWheelDirection=0,lastWheelEvent=0,lastWheelTurn=-Infinity,lastTurnDirection=0;
+let wheelAmount=0,wheelConsumed=false,wheelThreshold=32,lastWheelDirection=0,lastWheelEvent=-Infinity;
 addEventListener('wheel',e=>{
  if(document.querySelector('dialog[open]')||e.ctrlKey||e.target.closest('input,textarea,select,[data-scroll-panel]'))return;
  const direction=Math.sign(e.deltaY);if(!direction||Math.abs(e.deltaX)>Math.abs(e.deltaY))return;
- const now=performance.now(),changed=direction!==lastWheelDirection;
- if(changed||now-lastWheelEvent>180)wheelAmount=0;
+ const now=performance.now(),fresh=now-lastWheelEvent>220,reversed=lastWheelDirection!==0&&direction!==lastWheelDirection;
+ // A gesture stays consumed through its entire momentum tail, however long it lasts.
+ // A pause or a deliberate reversal starts a fresh gesture, without an animation lock.
+ if(fresh||reversed){wheelAmount=0;wheelConsumed=false;wheelThreshold=reversed&&!fresh?48:32;}
  lastWheelDirection=direction;lastWheelEvent=now;
  const content=e.target.closest('.page-content,.sound-content');
- if(content&&pages[current].contains(content)&&canScroll(direction,content)){wheelAmount=0;return;}
+ if(content&&pages[current].contains(content)&&canScroll(direction,content)){wheelAmount=0;wheelConsumed=true;return;}
  e.preventDefault();
- // A bounded animation pause never depends on the wheel becoming completely idle.
- if(direction===lastTurnDirection&&now-lastWheelTurn<780)return;
+ if(wheelConsumed)return;
  wheelAmount+=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?innerHeight:1);
- if(Math.abs(wheelAmount)<32)return;
- const target=Math.max(0,Math.min(pages.length-1,current+direction));wheelAmount=0;
- if(target===current)return;
- lastWheelTurn=now;lastTurnDirection=direction;goTo(target);
+ if(Math.abs(wheelAmount)<wheelThreshold)return;
+ wheelConsumed=true;wheelAmount=0;
+ const target=Math.max(0,Math.min(pages.length-1,current+direction));
+ if(target!==current)goTo(target);
 },{passive:false});
 
 document.addEventListener('keydown',e=>{if(e.defaultPrevented||document.querySelector('dialog[open]')||e.target.closest('input,textarea,select,summary,[contenteditable],[data-scroll-panel]')||(e.key===' '&&e.target.closest('button,a'))||e.altKey||e.ctrlKey||e.metaKey||e.repeat)return;let target;if(e.key==='ArrowDown'||e.key==='PageDown'||(e.key===' '&&!e.shiftKey))target=current+1;else if(e.key==='ArrowUp'||e.key==='PageUp'||(e.key===' '&&e.shiftKey))target=current-1;else if(e.key==='Home')target=0;else if(e.key==='End')target=pages.length-1;else return;e.preventDefault();goTo(target);});
