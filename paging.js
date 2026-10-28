@@ -65,37 +65,27 @@ $('#deckPrev').addEventListener('click',()=>goTo(current-1));$('#deckNext').addE
 function onHash(){const raw=decodeURIComponent(location.hash.slice(1)),id=raw==='review-continuity'?'review':raw;const index=pages.findIndex(p=>p.id===id);if(index>=0)goTo(index,{hash:false});else if(document.getElementById(id)?.classList.contains('source-entry'))openMaterials(id);}
 addEventListener('hashchange',onHash);
 function canScroll(direction,el=pages[current].querySelector('.page-content,.sound-content,.wrap')){if(!el||el.scrollHeight<=el.clientHeight+8)return false;return direction>0?el.scrollTop+el.clientHeight<el.scrollHeight-2:el.scrollTop>2;}
-let wheelAmount=0,wheelPeak=0,wheelStartThreshold=32,wheelTurned=false,wheelScrolledContent=false,wheelBoundaryAt=null,wheelLowSince=null;
-let lastWheelDirection=0,lastWheelMagnitude=0,lastWheelEvent=-Infinity,lastWheelPageAt=-Infinity,wheelSamples=[];
-function sustainedWheel(now,magnitude){
- if(magnitude<Math.max(.5,Math.min(24,wheelPeak*.35)))return false;
- const recent=wheelSamples.filter(s=>now-s.time<140),middle=wheelSamples.filter(s=>now-s.time>=140&&now-s.time<280),older=wheelSamples.filter(s=>now-s.time>=280);
- if(recent.length>=2&&middle.length>=2&&older.length>=2){const mean=items=>items.reduce((n,s)=>n+s.value,0)/items.length;return !(mean(recent)<mean(middle)*.985&&mean(middle)<mean(older)*.985);}
- if(wheelSamples.length>=3)return magnitude>=wheelSamples[0].value*.96;
- return magnitude>=wheelPeak*.65;
-}
+let wheelAmount=0,wheelTurned=false,wheelScrolledContent=false,lastWheelDirection=0,lastWheelEvent=-Infinity;
 addEventListener('wheel',e=>{
  if(document.querySelector('dialog[open]')||e.ctrlKey||e.target.closest('input,textarea,select,[data-scroll-panel]'))return;
  const direction=Math.sign(e.deltaY);if(!direction||Math.abs(e.deltaX)>Math.abs(e.deltaY))return;
- const now=performance.now(),delta=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?innerHeight:1),magnitude=Math.abs(delta);
- const fresh=now-lastWheelEvent>220,reversed=lastWheelDirection!==0&&direction!==lastWheelDirection;
- const newImpulse=!fresh&&!reversed&&lastWheelMagnitude>0&&magnitude>=Math.max(8,lastWheelMagnitude*1.8)&&lastWheelMagnitude<wheelPeak*.55&&wheelLowSince!==null&&now-wheelLowSince>=100;
- if(fresh||reversed||newImpulse){wheelAmount=0;wheelPeak=0;wheelStartThreshold=reversed&&!fresh?48:32;wheelTurned=false;wheelScrolledContent=false;wheelBoundaryAt=null;wheelLowSince=null;wheelSamples=[];}
- lastWheelDirection=direction;lastWheelMagnitude=magnitude;lastWheelEvent=now;wheelPeak=Math.max(wheelPeak,magnitude);if(magnitude<wheelPeak*.4){if(wheelLowSince===null)wheelLowSince=now;}else wheelLowSince=null;
- wheelSamples.push({time:now,value:magnitude});wheelSamples=wheelSamples.filter(s=>now-s.time<=420);
+ const now=performance.now(),fresh=now-lastWheelEvent>180;
+ if(fresh){wheelAmount=0;wheelTurned=false;wheelScrolledContent=false;}
+ if(direction!==lastWheelDirection)wheelAmount=0;
+ lastWheelDirection=direction;lastWheelEvent=now;
+ // Consume the whole operation, including its inertia and renewed force.
+ // Neither elapsed animation time nor a bigger delta can unlock a second page.
+ if(wheelTurned){e.preventDefault();return;}
  const content=e.target.closest('.page-content,.sound-content');
- if(content&&pages[current].contains(content)&&canScroll(direction,content)){wheelAmount=0;wheelScrolledContent=true;wheelBoundaryAt=null;return;}
+ if(content&&pages[current].contains(content)&&canScroll(direction,content)){wheelAmount=0;wheelScrolledContent=true;return;}
  e.preventDefault();
- const sustained=sustainedWheel(now,magnitude);
- // Continuous deliberate input can advance again; decaying momentum cannot.
- if(wheelTurned&&(now-lastWheelPageAt<740||!sustained)){wheelAmount=0;return;}
- if(wheelScrolledContent){if(wheelBoundaryAt===null)wheelBoundaryAt=now;if(now-wheelBoundaryAt<240||!sustained){wheelAmount=0;return;}}
- wheelAmount+=delta;
- const threshold=wheelTurned?64:wheelStartThreshold;
- if(Math.abs(wheelAmount)<threshold)return;
- const target=Math.max(0,Math.min(pages.length-1,current+direction));wheelAmount=0;
- if(target===current)return;
- wheelTurned=true;wheelScrolledContent=false;wheelBoundaryAt=null;lastWheelPageAt=now;goTo(target);
+ // A content-scrolling operation never also changes the presentation page.
+ if(wheelScrolledContent)return;
+ wheelAmount+=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?innerHeight:1);
+ if(Math.abs(wheelAmount)<40)return;
+ wheelTurned=true;wheelAmount=0;
+ const target=Math.max(0,Math.min(pages.length-1,current+direction));
+ if(target!==current)goTo(target);
 },{passive:false});
 
 document.addEventListener('keydown',e=>{if(e.defaultPrevented||document.querySelector('dialog[open]')||e.target.closest('input,textarea,select,summary,[contenteditable],[data-scroll-panel]')||(e.key===' '&&e.target.closest('button,a'))||e.altKey||e.ctrlKey||e.metaKey||e.repeat)return;let target;if(e.key==='ArrowDown'||e.key==='PageDown'||(e.key===' '&&!e.shiftKey))target=current+1;else if(e.key==='ArrowUp'||e.key==='PageUp'||(e.key===' '&&e.shiftKey))target=current-1;else if(e.key==='Home')target=0;else if(e.key==='End')target=pages.length-1;else return;e.preventDefault();goTo(target);});
