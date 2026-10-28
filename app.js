@@ -5,7 +5,8 @@ const asset=src=>window.DCT_ASSETS?.[src]||src;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const cropFrame=(src,alt,crop='58,112,815,538',extra='')=>`<div class="source-frame ${extra}" data-crop="${crop}"><img src="${src}" alt="${esc(alt)}" loading="lazy"></div>`;
 const frameObserver=new ResizeObserver(entries=>entries.forEach(({target})=>fitFrame(target)));
-function fitFrame(el){const img=el.querySelector('img');if(!img)return;const [a,b,c,d]=el.dataset.crop.split(',').map(Number);const sw=1280,sh=589,w=el.clientWidth,h=el.clientHeight;if(!w||!h)return;const k=Math.max(w/(c-a),h/(d-b));Object.assign(img.style,{width:sw*k+'px',height:sh*k+'px',left:-(a*k+((c-a)*k-w)/2)+'px',top:-(b*k+((d-b)*k-h)/2)+'px'});}
+function fitFrame(el){const img=el.querySelector('img');if(!img)return;const [a,b,c,d]=el.dataset.crop.split(',').map(Number),sw=img.naturalWidth||+el.dataset.sourceWidth||1280,sh=img.naturalHeight||+el.dataset.sourceHeight||589,w=el.clientWidth,h=el.clientHeight;if(!w||!h)return;const k=(el.dataset.fit==='contain'?Math.min:Math.max)(w/(c-a),h/(d-b));Object.assign(img.style,{width:sw*k+'px',height:sh*k+'px',left:((w-(c-a)*k)/2-a*k)+'px',top:((h-(d-b)*k)/2-b*k)+'px',clipPath:`inset(${b/sh*100}% ${(sw-c)/sw*100}% ${(sh-d)/sh*100}% ${a/sw*100}%)`});if(!img.dataset.frameBound){img.dataset.frameBound='true';img.addEventListener('load',()=>fitFrame(el));}}
+
 function observeFrames(){$$('[data-crop]').forEach(el=>{frameObserver.observe(el);fitFrame(el);});}
 const story=[
  ['0—4 秒','古镇与时代','群山、古镇与红军队伍。',3,'古镇'],
