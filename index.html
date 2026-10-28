@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>侗草堂｜影像创作与 AI 制作复盘</title>
+  <meta name="description" content="侗草堂红色历史微短剧的影像创作档案：故事与分镜、五条样片记录、制作复盘、完整提示词和原始资料。">
+  <meta name="theme-color" content="#171612">
+  <link rel="stylesheet" href="styles.css">
+  <script src="data.js" defer></script><script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+<div class="reading-progress" aria-hidden="true"><i id="readingProgress"></i></div>
+<header class="site-header">
+  <a class="brand" href="#top" aria-label="侗草堂，返回封面">侗草堂<span>影像创作档案</span></a>
+  <nav class="desktop-nav" aria-label="章节导航">
+    <a href="#story">故事</a><a href="#visual">影像</a><a href="#storyboard">分镜</a><a href="#samples">样片</a><a href="#review">复盘</a><a href="#workflow">制作</a><a href="#archive">资料</a>
+  </nav>
+  <button class="outline-button small" id="openSlides">浏览原稿 <span aria-hidden="true">↗</span></button>
+  <button class="menu-button" id="menuToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="打开章节导航"><span></span><span></span></button>
+</header>
+<nav class="mobile-nav" id="mobileNav" aria-label="移动端章节导航" hidden>
+ <a href="#story">01 故事与人物</a><a href="#visual">02 影像语言</a><a href="#storyboard">03 分镜结构</a><a href="#samples">04 样片档案</a><a href="#review">05 成片复盘</a><a href="#workflow">06 制作流程</a><a href="#archive">07 原始资料</a>
+</nav>
+<main id="main">
+<section class="hero" id="top" aria-label="封面">
+  <div class="hero-art" aria-hidden="true"><img src="assets/sample-5.png" alt="" fetchpriority="high"></div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="hero-copy">
+    <p class="eyebrow light">红色历史微短剧项目</p>
+    <h1><span class="project-name">侗草堂</span><span class="hero-topic">影像创作与<br>AI 制作复盘</span></h1>
+    <p class="hero-byline">扶瑀琪</p>
+    <div class="hero-actions"><a class="primary-button" href="#story">开始浏览 <span aria-hidden="true">↓</span></a><button class="text-button" id="heroSlides">查看 16 页原稿</button></div>
+  </div>
+  <p class="hero-caption">飞书 C1 原始样片画面</p>
+  <div class="hero-bottom"><span>故事 · 影像 · 创作方法</span><a href="#archive">完整提示词与原始记录 <span aria-hidden="true">↘</span></a></div>
+</section>
+
+<section class="chapter story-section wrap" id="story">
+ <div class="chapter-heading"><p class="eyebrow">01 / 故事与人物</p><h2>龙溪古镇的雨夜</h2><p class="chapter-deck">一只药箱，承载决定，也连接传承。</p></div>
+ <div class="story-spread">
+  <div class="story-copy card">
+   <span class="year">1936</span><h3>侗医吴怀安</h3>
+   <p class="large-copy">背起药箱，穿越封锁，为被困深山的红军伤员送药救治。</p>
+   <div class="subsection"><p class="label">情感与传承</p><p>他的犹豫、决定与行动，让军民情谊成为可见的细节。药箱与信物，连接往事与当代传承。</p></div>
+   <p class="source-note">故事背景依据原文创作提示词。</p>
+  </div>
+  <figure class="story-photo"><button class="image-button" data-image="assets/village.jpg" data-caption="侗寨环境参考 · 广西程阳，非龙溪古镇历史照片。" aria-label="放大侗寨环境参考图片"><img src="assets/village.jpg" loading="lazy" alt="山林、梯田与木楼组成的程阳侗寨景观"><span class="zoom-hint">查看原图 ↗</span></button><figcaption>侗寨环境参考 · 广西程阳</figcaption></figure>
+ </div>
+</section>
+
+<section class="chapter visual-section" id="visual">
+ <div class="wrap">
+  <div class="chapter-heading"><p class="eyebrow">02 / 摄影与美术</p><h2>影像质感与镜头语言</h2><p class="chapter-deck">让材质有纹理，让动作有重量，让光线有来源。</p></div>
+  <div class="visual-spread">
+   <div class="visual-copy">
+    <article class="card material-card"><p class="label">统一质感要求</p><p>皮肤、粗布、草药与湿木保留纹理。<br>表演保持克制，动作保留重量。<br>光线来自油灯、火把与门窗天光。</p></article>
+    <div class="lens-list">
+     <article class="lens card"><h3>24 <small>mm</small></h3><div><span class="label">空间与危险</span><p>广角交代古镇与山林，保留危险与压迫感。</p></div></article>
+     <article class="lens card"><h3>50 <small>mm</small></h3><div><span class="label">交流与视线</span><p>过肩正反打遵守轴线，衔接视线与光线方向。</p></div></article>
+     <article class="lens card"><h3>85 <small>mm</small></h3><div><span class="label">细节与情感</span><p>眼神、手部与信物特写，让情绪落在具体动作上。</p></div></article>
+    </div>
+   </div>
+   <figure class="texture-photo"><button class="image-button" data-image="assets/hands.jpg" data-caption="称量动作与药柜肌理 · 金门传统药铺实拍参考。焦段文字为项目原文要求，并不描述本照片的拍摄参数。" aria-label="放大称量手势参考图片"><img src="assets/hands.jpg" loading="lazy" alt="传统药铺中，手持杆秤称量草药的动作细节"><span class="zoom-hint">查看原图 ↗</span></button><figcaption>称量动作与药柜肌理 · 实拍参考</figcaption></figure>
+  </div>
+ </div>
+</section>
+
+<section class="chapter storyboard-section" id="storyboard">
+ <div class="wrap">
+  <div class="chapter-heading light-heading"><p class="eyebrow light">03 / 分镜结构</p><h2><span class="display-number">30</span> 秒，七个叙事段落</h2><p class="chapter-deck">沿着时间线阅读，查看每个段落的叙事任务。</p></div>
+  <div class="scene-spread" id="scenePanel" role="tabpanel" aria-labelledby="beat-0">
+   <div class="scene-visual"><div class="source-frame" id="sceneFrame" data-crop="58,112,815,538"><img src="assets/cost-3.png" alt="项目原始样片中的古镇画面"></div><p class="scene-caption" id="sceneCaption">项目原始样片 · 古镇画面</p></div>
+   <div class="scene-copy"><span class="scene-time" id="sceneTime">0—4 秒</span><h3 id="sceneTitle">古镇与时代</h3><p id="sceneBody">群山、古镇与红军队伍。</p><p class="scene-source" id="sceneSource">画面取自项目原始样片，仅作为对应主题的画面参照。</p></div>
+  </div>
+  <div class="timeline" id="timeline" role="tablist" aria-label="七个叙事段落"></div>
+  <p class="quiet-note">上方使用原始样片中已有的古镇、侗医与传承画面作为主题参照。段落时长与动作结构沿用原文。</p>
+ </div>
+</section>
+
+<section class="chapter wrap" id="samples">
+ <div class="chapter-heading"><p class="eyebrow">04 / 样片档案</p><h2>五条样片记录</h2><p class="chapter-deck">参数与评估沿用原文，画面和文字放在同一个比较框架中。</p></div>
+ <div class="table-shell"><table class="records-table"><caption class="sr-only">A1、B1、B2、B3、C1 样片参数与评估</caption><thead><tr><th scope="col">编号</th><th scope="col">内容方向</th><th scope="col">原文参数</th><th scope="col">原文评估</th></tr></thead><tbody id="recordsTable"></tbody></table></div>
+ <p class="source-note table-note">平台均记为即梦，模型参数均记为 2.5。表中保留原文评估，不将其作为已完成优化的证明。</p>
+ <article class="b1-section">
+  <div class="b1-copy"><p class="eyebrow light">B1 / 创作重点</p><h3>战地托付<br>与山林逃亡</h3><div class="dark-card"><p class="label">叙事主线</p><h4>托付之后，继续前行</h4><p>连长托付、伤势与信物，构成贯穿逃亡段落的连续行动。</p></div><div class="b1-constraints"><article class="dark-card"><h4>动作逻辑</h4><p>先交代坡向与出口，再进入快切。</p></article><article class="dark-card"><h4>连续性</h4><p>左臂伤势、布条与收藏动作保持一致。</p></article></div></div>
+  <div class="b1-picture"><div class="source-frame" data-crop="58,112,815,538"><img src="assets/cost-7.png" alt="项目夜战样片中的战壕画面" loading="lazy"></div><p class="source-note">项目夜战样片画面参考，非 B1 附件。</p></div>
+ </article>
+ <div class="section-heading"><h3>两轮夜战样片对照</h3><p>每幅画面对应其已呈现效果与待优化问题。</p></div>
+ <div class="comparison-grid">
+  <article class="comparison-card card"><h4><span>B2</span> 夜战氛围</h4><button class="image-button compare-image" data-image="assets/sample-3.png" data-caption="B2 原始样片附件预览，非真实战场影像。" aria-label="放大 B2 样片截图"><img src="assets/sample-3.png" alt="B2 样片中在爆炸旁躲避的战士" loading="lazy"><span class="zoom-hint">放大样片截图 ↗</span></button><dl><div><dt>已呈现</dt><dd>负空间营造紧张情绪。<br>氛围达标。</dd></div><div><dt>待优化</dt><dd>战斗逻辑仍不顺畅。</dd></div></dl></article>
+  <article class="comparison-card card"><h4><span>B3</span> 刘小兵视角</h4><button class="image-button compare-image" data-image="assets/sample-4.png" data-caption="B3 原始样片附件预览，非真实战场影像。" aria-label="放大 B3 样片截图"><img src="assets/sample-4.png" alt="B3 样片中战士在战壕内协助伤员" loading="lazy"><span class="zoom-hint">放大样片截图 ↗</span></button><dl><div><dt>已呈现</dt><dd>运送弹药、协助伤员、寻找连长。<br>调度更复杂。</dd></div><div><dt>待优化</dt><dd>战斗逻辑仍需优化。</dd></div></dl></article>
+ </div>
+ <a class="inline-link" href="#promptSources">查看五条完整提示词与原始评估 <span aria-hidden="true">↘</span></a>
+</section>
+
+<section class="chapter review-section" id="review"><div class="wrap">
+ <div class="chapter-heading"><p class="eyebrow">05 / 复盘与验收</p><h2>成片优化与下一轮检查</h2><p class="chapter-deck">一张卡片对应一个问题、一项调整和一组检查标准。</p></div>
+ <div class="review-column-head" aria-hidden="true"><span>画面参照 / 当前问题</span><span>调整方向</span><span>下一轮检查</span></div><div id="reviewCards" class="review-cards"></div>
+ <p class="source-note">画面用于说明检查对象，不作为优化前后对比，也不代表问题已修复。</p>
+</div></section>
+
+<section class="chapter wrap" id="workflow">
+ <div class="chapter-heading"><p class="eyebrow">06 / 制作方法</p><h2>从提示词到音画组织</h2><p class="chapter-deck">同一镜头的风格、调度与连续性，需要共同约束。</p></div>
+ <div class="prompt-spread">
+  <figure class="manuscript-figure"><button class="image-button" data-image="assets/manuscript.jpg" data-caption="《茹草编》序页 · 文献参照。不是本项目提示词原稿。" aria-label="放大文献参照"><img src="assets/manuscript.jpg" alt="《茹草编》序页扫描件" loading="lazy"><span class="zoom-hint">查看文献 ↗</span></button><figcaption>《茹草编》序页 · 文献参照</figcaption></figure>
+  <div class="prompt-layers"><h3>提示词的三层结构</h3><article class="card"><span>01</span><div><h4>风格限定</h4><p>真实摄影质感，色彩、光源与材质。</p></div></article><article class="card"><span>02</span><div><h4>分镜描述</h4><p>镜号、运镜、角度，站位与画面内容。</p></div></article><article class="card"><span>03</span><div><h4>连续性约束</h4><p>人物、服装、道具，轴线、视线与运动方向。</p></div></article><p class="prompt-question">人物在哪里，看向哪里，要完成什么动作。</p></div>
+ </div>
+ <div class="section-heading"><h3>制作流程</h3><p>按先后顺序组织六个环节。</p></div>
+ <div class="workflow-spread"><ol class="workflow-grid" id="workflowCards"></ol><figure class="camera-figure"><img src="assets/camera.jpg" alt="摄影机实拍参考" loading="lazy"><figcaption>摄影设备实拍参考，非项目实际器材配置。</figcaption></figure></div>
+</section>
+
+<section class="sound-section"><div class="sound-photo" aria-hidden="true"><img src="assets/dispense.jpg" alt="" loading="lazy"></div><div class="sound-shade" aria-hidden="true"></div><div class="wrap sound-content"><p class="eyebrow light">声音与剪辑</p><h2>雨声、呼吸与木料声</h2><div class="sound-cards"><article class="dark-card sound-main"><p class="label">环境声与配乐</p><p>声音先行连接场景，<br>配乐为人物让出空间。<br>保留现场的温度。</p></article><div class="sound-pair"><article class="dark-card"><h3>配音</h3><p>重要独白用更有情感的配音表达。</p></article><article class="dark-card"><h3>调色</h3><p>后期统一冷暖，保持整体色调。</p></article></div></div><p class="sound-caption">药铺动作实拍参考 · 槟城</p></div></section>
+
+<section class="chapter archive-section wrap" id="archive">
+ <div class="chapter-heading"><p class="eyebrow">07 / 原始资料</p><h2>每一次迭代，都有据可查</h2><p class="chapter-deck">保留原图、完整提示词和培训正文，供汇报后继续查阅。</p></div>
+ <div class="iteration-spread"><figure><button class="image-button iteration-image" data-image="assets/iteration.png" data-caption="《侗草堂》提示词迭代地图。17 个版本节点、5 条视频记录，原图完整保留。" aria-label="放大完整迭代地图"><img src="assets/iteration.png" alt="侗草堂提示词迭代地图，包含四阶段和17个版本节点" loading="lazy"><span class="zoom-hint">放大完整地图 ↗</span></button></figure><article class="card iteration-guide"><h3>提示词迭代地图</h3><div class="iteration-counts"><p><strong>17</strong>个版本节点</p><p><strong>5</strong>条视频记录</p></div><ol><li>风格与摄影探索</li><li>40 秒概念片分支</li><li>前 30 秒夜战迭代</li><li>接下来的 30 秒与结构调整</li></ol><p>结合左侧图示查看版本分支。五条样片提示词在下方完整收录。</p></article></div>
+ <div class="section-heading" id="promptSources"><h3>完整提示词与培训正文</h3><p>展开可阅读、复制或下载完整文字。</p></div>
+ <div class="source-tools"><label class="source-search"><span>查找资料</span><input id="sourceSearch" type="search" placeholder="输入编号、标题或内容关键词" autocomplete="off"></label><button class="outline-button" id="expandSources">展开全部</button><button class="text-button dark-text" id="downloadSources">下载完整文字</button><span class="source-count" id="sourceCount" aria-live="polite"></span></div>
+ <div class="source-accordions" id="sourceAccordions"></div><p id="sourceEmpty" class="empty-state" hidden>没有找到匹配资料，请换一个关键词。</p>
+ <div class="section-heading"><h3>积分消耗原始记录</h3><p>九张原始截图，区分项目样片与其他示例。点击可放大。</p></div><div class="cost-gallery" id="costGallery"></div>
+ <p class="source-note">记录包含其他示例，不将九条记录相加作为本项目总成本。</p>
+ <details class="full-notes"><summary><span>16 页原稿的逐页内容与备注</span><span class="summary-action">展开查阅</span></summary><div class="page-notes" id="pageNotes"></div></details>
+ <details class="full-notes"><summary><span>来源与图片说明</span><span class="summary-action">查看出处</span></summary><div class="credit-content"><p>项目生成样片来自原飞书资料，不作为真实历史摄影。外部照片仅作实物、环境、材质或制作方法参考。</p><p><a href="https://my.feishu.cn/base/WbPVb688tawpxKsoa9HcmN2nnCf" target="_blank" rel="noreferrer">打开飞书项目原表 ↗</a></p><div id="photoCredits"></div></div></details>
+</section>
+
+<section class="closing"><div class="wrap"><p class="eyebrow light">侗草堂</p><h2>一味侗药，一片赤诚</h2><p>军民鱼水情，长征精神代代相传</p><a class="outline-button light-button" href="#top">返回封面 ↑</a></div></section>
+</main>
+<footer class="site-footer"><span>侗草堂 / 影像创作与 AI 制作复盘</span><span>扶瑀琪 · 项目创作档案</span><a href="https://my.feishu.cn/base/WbPVb688tawpxKsoa9HcmN2nnCf" target="_blank" rel="noreferrer">飞书原始资料 ↗</a></footer>
+
+<dialog id="imageDialog" class="image-dialog" aria-labelledby="imageDialogTitle"><div class="dialog-toolbar"><h2 id="imageDialogTitle">图片详情</h2><div><button class="dialog-button" id="zoomImage" aria-pressed="false">原尺寸查看</button><button class="dialog-button" id="closeImage" aria-label="关闭图片详情">关闭 ×</button></div></div><div class="lightbox-stage" id="lightboxStage" tabindex="0"><img id="lightboxImage" alt=""></div><p id="imageCaption"></p></dialog>
+<dialog id="slideDialog" class="slide-dialog" aria-labelledby="slideDialogTitle"><div class="dialog-toolbar"><h2 id="slideDialogTitle">原稿演示</h2><div><button class="dialog-button" id="fullscreenSlides">全屏</button><button class="dialog-button" id="closeSlides" aria-label="关闭原稿演示">关闭 ×</button></div></div><div class="slide-stage"><img id="slideImage" src="assets/slide-01.png" alt="第1页原稿，封面"></div><div class="slide-controls"><button class="dialog-button" id="prevSlide">← 上一页</button><label>页码 <select id="slideSelect" aria-label="选择原稿页码"></select><span id="slideCount"> / 16</span></label><button class="dialog-button" id="nextSlide">下一页 →</button></div><p class="keyboard-hint">方向键翻页，Esc 关闭</p></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<noscript><p class="noscript-note">启用 JavaScript 可使用分镜切换、完整资料和原稿演示。<a href="https://my.feishu.cn/base/WbPVb688tawpxKsoa9HcmN2nnCf">也可直接打开飞书原始资料。</a></p></noscript>
+</body></html>
